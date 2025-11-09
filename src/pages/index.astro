@@ -76,6 +76,7 @@ import LogoCutted from "@/assets/logo-cutted.svg"
   
   #scroll-logo {
     z-index: 10;
+    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
   }
 </style>
 
@@ -102,13 +103,6 @@ import LogoCutted from "@/assets/logo-cutted.svg"
         opacity: 1,
         width: "clamp(20vh, 25%, 30vh)",
         duration: 0.5,
-      },
-      0.15
-    )
-    .to(
-      "#logo-mask",
-      {
-        opacity: 0,
       },
       0.15
     )
