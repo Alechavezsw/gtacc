@@ -24,11 +24,6 @@ import PlayButtonIcon from "@/assets/play-button.svg"
         class="h-screen scale-125 block overflow-hidden fixed"
       >
         <img
-          id="hero-key-logo"
-          src="/new-logo.png"
-          class="absolute w-1/4 h-1/4 object-contain top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-        />
-        <img
           id="hero-key-background"
           src={HeroKeyBackground.src}
           class="w-full h-full object-cover"
@@ -69,7 +64,7 @@ import PlayButtonIcon from "@/assets/play-button.svg"
     </footer>
   </div>
 
-  <section id="content-section" class="relative z-10 min-h-screen bg-transparent flex items-center justify-center">
+  <section id="content-section" class="relative z-10 min-h-screen bg-black flex items-center justify-center">
     <img
       src="/recurso-12.png"
       alt="Cosecha Creativa"
@@ -110,7 +105,6 @@ import PlayButtonIcon from "@/assets/play-button.svg"
   })
 
   tl.to("#hero-key", { duration: 1, scale: 1 })
-    .to("#hero-key-logo", { opacity: 0 }, "<")
     .to("#hero-footer", { opacity: 0 }, "<")
     .to("#hero-play-button", { opacity: 0 }, "<")
     .to(
