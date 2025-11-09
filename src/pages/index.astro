@@ -69,12 +69,18 @@ import PlayButtonIcon from "@/assets/play-button.svg"
     </footer>
   </div>
 
-  <section id="content-section" class="relative z-10 min-h-screen bg-black flex items-center justify-center">
-    <img
-      src="/recurso-12.png"
-      alt="Cosecha Creativa"
-      class="w-full h-full object-cover"
-    />
+  <section id="content-section" class="relative z-10 min-h-screen bg-black flex items-center justify-center overflow-hidden">
+    <div class="neon-container relative w-full h-screen flex items-center justify-center">
+      <div class="neon-glow absolute inset-0"></div>
+      <div class="neon-glow-2 absolute inset-0"></div>
+      <img
+        id="neon-image"
+        src="/recurso-12.png"
+        alt="Cosecha Creativa"
+        class="relative z-10 w-full h-full object-cover neon-image"
+      />
+      <div class="scanlines absolute inset-0 pointer-events-none"></div>
+    </div>
   </section>
 </Layout>
 
@@ -93,6 +99,137 @@ import PlayButtonIcon from "@/assets/play-button.svg"
   
   #scroll-logo-wrapper {
     z-index: 10;
+  }
+
+  /* Neon Effects */
+  .neon-container {
+    position: relative;
+  }
+
+  .neon-glow {
+    background: radial-gradient(
+      circle at center,
+      rgba(0, 255, 255, 0.3) 0%,
+      rgba(255, 0, 255, 0.2) 30%,
+      rgba(0, 255, 255, 0.1) 60%,
+      transparent 100%
+    );
+    animation: pulse-glow 3s ease-in-out infinite;
+    filter: blur(60px);
+  }
+
+  .neon-glow-2 {
+    background: radial-gradient(
+      circle at center,
+      rgba(255, 0, 255, 0.3) 0%,
+      rgba(0, 255, 255, 0.2) 30%,
+      rgba(255, 0, 255, 0.1) 60%,
+      transparent 100%
+    );
+    animation: pulse-glow-2 4s ease-in-out infinite;
+    filter: blur(80px);
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% {
+      opacity: 0.6;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.1);
+    }
+  }
+
+  @keyframes pulse-glow-2 {
+    0%, 100% {
+      opacity: 0.4;
+      transform: scale(1.1);
+    }
+    50% {
+      opacity: 0.8;
+      transform: scale(1);
+    }
+  }
+
+  .neon-image {
+    filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.5))
+            drop-shadow(0 0 40px rgba(255, 0, 255, 0.3))
+            drop-shadow(0 0 60px rgba(0, 255, 255, 0.2));
+    animation: neon-flicker 4s ease-in-out infinite;
+    transition: filter 0.3s ease;
+  }
+
+  .neon-image:hover {
+    filter: drop-shadow(0 0 30px rgba(0, 255, 255, 0.8))
+            drop-shadow(0 0 60px rgba(255, 0, 255, 0.5))
+            drop-shadow(0 0 90px rgba(0, 255, 255, 0.3));
+  }
+
+  @keyframes neon-flicker {
+    0%, 100% {
+      filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.5))
+              drop-shadow(0 0 40px rgba(255, 0, 255, 0.3))
+              drop-shadow(0 0 60px rgba(0, 255, 255, 0.2));
+    }
+    25% {
+      filter: drop-shadow(0 0 25px rgba(0, 255, 255, 0.6))
+              drop-shadow(0 0 50px rgba(255, 0, 255, 0.4))
+              drop-shadow(0 0 70px rgba(0, 255, 255, 0.3));
+    }
+    50% {
+      filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.4))
+              drop-shadow(0 0 35px rgba(255, 0, 255, 0.2))
+              drop-shadow(0 0 55px rgba(0, 255, 255, 0.1));
+    }
+    75% {
+      filter: drop-shadow(0 0 25px rgba(0, 255, 255, 0.6))
+              drop-shadow(0 0 50px rgba(255, 0, 255, 0.4))
+              drop-shadow(0 0 70px rgba(0, 255, 255, 0.3));
+    }
+  }
+
+  .scanlines {
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.15),
+      rgba(0, 0, 0, 0.15) 1px,
+      transparent 1px,
+      transparent 2px
+    );
+    animation: scanline-move 8s linear infinite;
+    opacity: 0.3;
+  }
+
+  @keyframes scanline-move {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(100vh);
+    }
+  }
+
+  #content-section {
+    background: linear-gradient(
+      135deg,
+      #000000 0%,
+      #0a0a1a 25%,
+      #1a0a2e 50%,
+      #0a0a1a 75%,
+      #000000 100%
+    );
+    background-size: 400% 400%;
+    animation: gradient-shift 10s ease infinite;
+  }
+
+  @keyframes gradient-shift {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
   }
 </style>
 
