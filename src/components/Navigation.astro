@@ -13,61 +13,157 @@ const currentPath = Astro.url.pathname;
         />
       </a>
       
-      <ul class="flex items-center gap-8">
-        <li>
-          <a
-            href="/"
-            class={`text-white hover:text-yellow-400 transition-colors duration-300 ${
-              currentPath === "/" ? "text-yellow-400 font-semibold" : ""
-            }`}
-          >
-            Home
-          </a>
-        </li>
-        <li>
-          <a
-            href="/nosotros"
-            class={`text-white hover:text-yellow-400 transition-colors duration-300 ${
-              currentPath === "/nosotros" ? "text-yellow-400 font-semibold" : ""
-            }`}
-          >
-            Nosotros
-          </a>
-        </li>
-        <li>
-          <a
-            href="/proyectos"
-            class={`text-white hover:text-yellow-400 transition-colors duration-300 ${
-              currentPath === "/proyectos" ? "text-yellow-400 font-semibold" : ""
-            }`}
-          >
-            Proyectos
-          </a>
-        </li>
-        <li>
-          <a
-            href="/blog"
-            class={`text-white hover:text-yellow-400 transition-colors duration-300 ${
-              currentPath === "/blog" ? "text-yellow-400 font-semibold" : ""
-            }`}
-          >
-            Blog
-          </a>
-        </li>
-        <li>
-          <a
-            href="/contacto"
-            class={`text-white hover:text-yellow-400 transition-colors duration-300 ${
-              currentPath === "/contacto" ? "text-yellow-400 font-semibold" : ""
-            }`}
-          >
-            Contacto
-          </a>
-        </li>
-      </ul>
+      <!-- Toggle button -->
+      <button
+        id="menu-toggle"
+        class="md:hidden text-white hover:text-yellow-400 transition-colors duration-300 focus:outline-none"
+        aria-label="Toggle menu"
+      >
+        <svg
+          id="menu-icon"
+          class="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16"
+          />
+        </svg>
+        <svg
+          id="close-icon"
+          class="w-6 h-6 hidden"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M6 18L18 6M6 6l12 12"
+          />
+        </svg>
+      </button>
+
+      <!-- Navigation menu -->
+      <div
+        id="menu-links"
+        class="hidden md:flex md:items-center md:gap-8 absolute md:static top-full left-0 right-0 bg-black/95 md:bg-transparent backdrop-blur-md md:backdrop-blur-none flex-col md:flex-row py-4 md:py-0 border-t md:border-t-0 border-white/10"
+      >
+        <ul class="flex flex-col md:flex-row items-center gap-6 md:gap-8 w-full md:w-auto">
+          <li class="w-full md:w-auto text-center md:text-left">
+            <a
+              href="/"
+              class={`block py-2 md:py-0 text-white hover:text-yellow-400 transition-colors duration-300 ${
+                currentPath === "/" ? "text-yellow-400 font-semibold" : ""
+              }`}
+            >
+              Home
+            </a>
+          </li>
+          <li class="w-full md:w-auto text-center md:text-left">
+            <a
+              href="/nosotros"
+              class={`block py-2 md:py-0 text-white hover:text-yellow-400 transition-colors duration-300 ${
+                currentPath === "/nosotros" ? "text-yellow-400 font-semibold" : ""
+              }`}
+            >
+              Nosotros
+            </a>
+          </li>
+          <li class="w-full md:w-auto text-center md:text-left">
+            <a
+              href="/proyectos"
+              class={`block py-2 md:py-0 text-white hover:text-yellow-400 transition-colors duration-300 ${
+                currentPath === "/proyectos" ? "text-yellow-400 font-semibold" : ""
+              }`}
+            >
+              Proyectos
+            </a>
+          </li>
+          <li class="w-full md:w-auto text-center md:text-left">
+            <a
+              href="/blog"
+              class={`block py-2 md:py-0 text-white hover:text-yellow-400 transition-colors duration-300 ${
+                currentPath === "/blog" ? "text-yellow-400 font-semibold" : ""
+              }`}
+            >
+              Blog
+            </a>
+          </li>
+          <li class="w-full md:w-auto text-center md:text-left">
+            <a
+              href="/contacto"
+              class={`block py-2 md:py-0 text-white hover:text-yellow-400 transition-colors duration-300 ${
+                currentPath === "/contacto" ? "text-yellow-400 font-semibold" : ""
+              }`}
+            >
+              Contacto
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </nav>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const menuToggle = document.getElementById("menu-toggle");
+    const menuLinks = document.getElementById("menu-links");
+    const menuIcon = document.getElementById("menu-icon");
+    const closeIcon = document.getElementById("close-icon");
+
+    if (menuToggle && menuLinks) {
+      menuToggle.addEventListener("click", () => {
+        const isHidden = menuLinks.classList.contains("hidden");
+        
+        if (isHidden) {
+          menuLinks.classList.remove("hidden");
+          menuLinks.classList.add("flex");
+          menuIcon?.classList.add("hidden");
+          closeIcon?.classList.remove("hidden");
+        } else {
+          menuLinks.classList.add("hidden");
+          menuLinks.classList.remove("flex");
+          menuIcon?.classList.remove("hidden");
+          closeIcon?.classList.add("hidden");
+        }
+      });
+
+      // Cerrar menú al hacer clic en un enlace (móvil)
+      menuLinks.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+          if (window.innerWidth < 768) {
+            menuLinks.classList.add("hidden");
+            menuLinks.classList.remove("flex");
+            menuIcon?.classList.remove("hidden");
+            closeIcon?.classList.add("hidden");
+          }
+        });
+      });
+
+      // Cerrar menú al hacer clic fuera (móvil)
+      document.addEventListener("click", (e) => {
+        if (
+          window.innerWidth < 768 &&
+          !menuToggle.contains(e.target as Node) &&
+          !menuLinks.contains(e.target as Node) &&
+          !menuLinks.classList.contains("hidden")
+        ) {
+          menuLinks.classList.add("hidden");
+          menuLinks.classList.remove("flex");
+          menuIcon?.classList.remove("hidden");
+          closeIcon?.classList.add("hidden");
+        }
+      });
+    }
+  });
+</script>
 
 <style>
   nav {
@@ -78,13 +174,6 @@ const currentPath = Astro.url.pathname;
     text-decoration: none;
     font-size: 1rem;
     letter-spacing: 0.5px;
-  }
-  
-  @media (max-width: 768px) {
-    nav ul {
-      flex-direction: column;
-      gap: 1rem;
-    }
   }
 </style>
 
