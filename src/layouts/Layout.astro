@@ -24,10 +24,11 @@ import Navigation from "@/components/Navigation.astro"
   @import "tailwindcss";
 
   @theme {
-    --font-sans: "GTA", system-ui, sans-serif;
+    --font-sans: "Cabinet Grotesk", "GTA", system-ui, sans-serif;
     --font-narrow: "GTANarrow", system-ui, sans-serif;
 
     --animate-bounce-pulse: bounce-pulse 2s ease-in-out infinite;
+    --color-primary: #AF49FF;
   }
 
   @keyframes bounce-pulse {
@@ -89,6 +90,14 @@ import Navigation from "@/components/Navigation.astro"
     font-family: GTANarrow;
     src: url("/fonts/gta-narrow.woff") format("woff");
     font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Cabinet Grotesk";
+    src: url("/fonts/CabinetGrotesk-Black.otf") format("opentype");
+    font-weight: 900;
     font-style: normal;
     font-display: swap;
   }
