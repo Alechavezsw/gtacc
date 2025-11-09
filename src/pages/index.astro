@@ -8,6 +8,12 @@ import LogoCutted from "@/assets/logo-cutted.svg"
 
 <Layout>
   <div id="logo-mask" class="fixed top-0 w-full h-screen">
+    <img
+      id="scroll-logo"
+      src="/new-logo.png"
+      class="absolute top-[25%] left-1/2 -translate-x-1/2 w-[5000vh] h-auto object-contain opacity-0 pointer-events-none"
+      alt="Logo"
+    />
     <section>
       <picture
         id="hero-key"
@@ -16,7 +22,7 @@ import LogoCutted from "@/assets/logo-cutted.svg"
         <img
           id="hero-key-logo"
           src="/new-logo.png"
-          class="absolute w-full h-full object-cover"
+          class="absolute w-1/4 h-1/4 object-contain top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
         />
         <img
           id="hero-key-background"
@@ -65,6 +71,11 @@ import LogoCutted from "@/assets/logo-cutted.svg"
     mask-position: center 25%;
     mask-repeat: no-repeat;
     mask-size: clamp(5000vh, 3500%, 0vh);
+    opacity: 0;
+  }
+  
+  #scroll-logo {
+    z-index: 10;
   }
 </style>
 
@@ -86,9 +97,18 @@ import LogoCutted from "@/assets/logo-cutted.svg"
     .to("#hero-footer", { opacity: 0 }, "<")
     .to("#hero-play-button", { opacity: 0 }, "<")
     .to(
+      "#scroll-logo",
+      {
+        opacity: 1,
+        width: "clamp(20vh, 25%, 30vh)",
+        duration: 0.5,
+      },
+      0.15
+    )
+    .to(
       "#logo-mask",
       {
-        maskSize: "clamp(20vh, 25%, 30vh)",
+        opacity: 0,
       },
       0.15
     )
